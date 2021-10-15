@@ -12,7 +12,7 @@
         <li>
           <nuxt-link
             class="text-teal-600 hover:underline"
-            to="/en/blog">
+            to="/articles">
             Blog
           </nuxt-link>
         </li>
