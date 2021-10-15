@@ -26,6 +26,14 @@ export default {
       })
     })
   },
+  async fetch(context) {
+    // loading reference data - articles in this case
+    if (context.store.state.articles.loaded !== '1') {
+      let articlesRefRes = await context.app.$storyapi.get(`cdn/stories/`, { starts_with: 'articles/', version: 'draft' })
+      context.store.commit('articles/setArticles', articlesRefRes.data.stories)
+      context.store.commit('articles/setLoaded', '1')
+    }
+  },
   asyncData (context) {
     // inside real project
     // const version = context.query._storyblok || context.isDev ? 'draft' : 'published'

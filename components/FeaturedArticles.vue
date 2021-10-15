@@ -8,7 +8,7 @@ export default {
     },
     computed: {
         sortedArticles() {
-            const featuredArticles = this.$store.state.articles.articles.filter((article) => {
+            const featuredArticles = this.$store.state.articles.filter((article) => {
                 return this.blok.articles.includes(article.uuid)
             })
 
