@@ -30,8 +30,8 @@ export default {
     // loading reference data - articles in this case
     if (context.store.state.articles.loaded !== '1') {
       let articlesRefRes = await context.app.$storyapi.get(`cdn/stories/`, { starts_with: 'articles/', version: 'draft' })
-      context.store.commit('articles/setArticles', articlesRefRes.data.stories)
-      context.store.commit('articles/setLoaded', '1')
+      context.store.commit('setArticles', articlesRefRes.data.stories)
+      context.store.commit('setLoaded', '1')
     }
   },
   asyncData (context) {
