@@ -4,7 +4,16 @@ export default {
         blok: {
             type: Object,
             required: true 
-        }
+        },
+        products: Object,
+        categories: Object,
+        error: Object
+    },
+    data() {
+      return {
+        fullCategories: [],
+        fullProducts: []
+      }
     }
 }
 </script>

@@ -10,20 +10,32 @@ export default {
     htmlAttrs: {
       lang: 'en'
     },
-    meta: [
-      { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' },
-      { name: 'format-detection', content: 'telephone=no' }
+    meta: [{
+        charset: 'utf-8'
+      },
+      {
+        name: 'viewport',
+        content: 'width=device-width, initial-scale=1'
+      },
+      {
+        hid: 'description',
+        name: 'description',
+        content: ''
+      },
+      {
+        name: 'format-detection',
+        content: 'telephone=no'
+      }
     ],
-    link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
-    ]
+    link: [{
+      rel: 'icon',
+      type: 'image/x-icon',
+      href: '/favicon.ico'
+    }]
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: [
-  ],
+  css: [],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
@@ -31,6 +43,12 @@ export default {
     '~/plugins/composition-api.js',
     '~/plugins/storyblok-rich-text-renderer.js'
   ],
+
+  env: {
+    /* https://store-w2gk34tjxo.mybigcommerce.com/ */
+    storeUrl: 'https://storyblok-partner-demo-store.mybigcommerce.com/',
+    storeToken: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiJ9.eyJjaWQiOjEsImNvcnMiOlsiaHR0cDovL2xvY2FsaG9zdDozMDAwIl0sImVhdCI6MTcwMzI2ODQ1NiwiaWF0IjoxNjM0OTA4ODQwLCJpc3MiOiJCQyIsInNpZCI6MTAwMTM4NjY2Mywic3ViIjoiaGE0MWI4bWg0eXFucDR6Zzc0MjVrOGNqNWgxZXhkMiIsInN1Yl90eXBlIjoyLCJ0b2tlbl90eXBlIjoxfQ.yRRc_CrQKCc1hIiHwVGMiUtyP9-RUeGhj38e6ubsEboPB8LXSJrP3nPK2qX-dbHhm5jWUvu12sfCd4VVHB-QdA'
+  },
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -48,16 +66,30 @@ export default {
     [
       'storyblok-nuxt',
       {
-        accessToken: 'mkDiRogz5Xa40ZYliWZguQtt',
+        accessToken: 'GlBndxRSmbN80CH09ZnaiQtt',
         cacheProvider: 'memory'
+      },
+    ],
+    [
+      '@vue-storefront/storyblok/nuxt',
+      {
+        "jsBridge": "https://app.storyblok.com/f/storyblok-v2-latest.js"
       }
-    ]
+    ],
+    [
+      '@vue-storefront/nuxt',
+      {
+        useRawSource: {
+          dev: ['@vue-storefront/storyblok'],
+          prod: ['@vue-storefront/storyblok']
+        }
+      }
+    ],
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {},
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {
-  }
+  build: {}
 }

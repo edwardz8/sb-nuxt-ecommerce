@@ -1,8 +1,13 @@
 <script>
+import dashify from 'dashify'
+import { availableComponents } from '../plugins/components'
+
 export default {
   data () {
     return {
-      story: { content: {} }
+      story: {},
+      error: null,
+      availableComponents
     }
   },
   mounted () {
@@ -10,10 +15,13 @@ export default {
       const storyblokInstance = new StoryBridge()
 
       // use the input event for instance update of content
-      storyblokInstance.on('input', (event) => {
-        console.log(this.story.content)
-        if (event.story.id === this.story.id) {
-          this.story.content = event.story.content
+      storyblokInstance.on('input', 'published', 'change', (event) => {
+        if (event.action === 'input') {
+          if (event.story.id === this.story.id) {
+            this.story.content = event.story.content
+          }
+        } else {
+          window.location.reload()
         }
       })
 
@@ -25,14 +33,6 @@ export default {
         })
       })
     })
-  },
-  async fetch(context) {
-    // loading reference data - articles in this case
-    if (context.store.state.articles.loaded !== '1') {
-      let articlesRefRes = await context.app.$storyapi.get(`cdn/stories/`, { starts_with: 'articles/', version: 'draft' })
-      context.store.commit('setArticles', articlesRefRes.data.stories)
-      context.store.commit('setLoaded', '1')
-    }
   },
   asyncData (context) {
     // inside real project
@@ -52,12 +52,24 @@ export default {
         context.error({ statusCode: res.response.status, message: res.response.data })
       }
     })
+  },
+  methods: {
+    dashify
   }
 };
 </script>
 
 <template>
   <section>
+    <div v-if="story.content">
+      <template v-for="component in story.content.body">
+        <component :is="`blok-${dashify(component.component)}`"
+          v-if="availableComponents.includes(`blok-${dashify(component.component)}`)"
+          :key="component._uid"
+          :blok="component"
+        ></component>
+      </template>
+    </div>
     <component
       v-if="story.content.component"
       :key="story.content._uid"

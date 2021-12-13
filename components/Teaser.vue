@@ -2,9 +2,9 @@
 export default {
   props: {
     blok: {
-      type: Object
+      type: Object,
     },
-  },
+  }
 };
 </script>
 
