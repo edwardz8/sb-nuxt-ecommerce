@@ -40,7 +40,7 @@ fragment CategoryFields on CategoryTreeItem {
 `
 
 async function sendQuery(query) {
-  const url = new URL(process.env.storeUrl)
+ // const url = new URL(process.env.storeUrl)
   const graphQLUrl = `${url.origin}/graphql`
 
   // Fetch data from the GraphQL Storefront API
